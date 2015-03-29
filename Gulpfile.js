@@ -2,7 +2,6 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     lint = require('gulp-jslint'),
     uglify = require('gulp-uglify'),
-    sourcemaps = require('gulp-sourcemaps'),
     ngAnnotate = require('gulp-ng-annotate'),
     del = require('del'),
     SOURCES = 'src/**/*.js';
@@ -15,11 +14,9 @@ gulp.task('cleanDist', function(cb) {
 
 gulp.task('build', ['lint', 'cleanDist'], function () {
     return gulp.src(['src/named-route-module.js', SOURCES])
-        .pipe(sourcemaps.init())
         .pipe(ngAnnotate())
         .pipe(concat('angular-named-route.js'))
         .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('dist'));
 });
 
