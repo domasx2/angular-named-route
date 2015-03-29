@@ -45,7 +45,7 @@ angular.module('myapp').controller('ThingCtrl', function (namedRouteService, $lo
     path = namedRouteService.reverse('thing-detail', {id: 1}); // '/thing/1'
 
     //open immediately
-    namedRouteServie.open('thing-detail', 1);
+    namedRouteService.open('thing-detail', 1);
     //is same as
     $location.path(namedRouteService.reverse('thing-detail', 1));
 });
