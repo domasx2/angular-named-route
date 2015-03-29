@@ -15,9 +15,11 @@ describe("namedRouteDirective", function () {
   });
 
   it('updates href with phone detail route, single arg', function() {
-    var element = $compile('<div><a named-route="\'phone-detail\'" route-params="1">link</a></div>')($rootScope);
+    $rootScope.hrefname = 'the link';
+    var element = $compile('<div><a named-route="\'phone-detail\'" route-params="1">{{hrefname}}</a></div>')($rootScope);
     $rootScope.$digest();
     expect(element.html()).toContain('href="/phones/1"');
+    expect(element.html()).toContain('the link');
   });
 
   it('updates href with phone detail route, object arg', function() {

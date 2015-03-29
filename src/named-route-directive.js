@@ -3,7 +3,6 @@ angular.module('ngNamedRoute').directive('namedRoute', function (namedRouteServi
 
     return {
         restrict: 'A',
-        transclude: true,
         scope: {
             name: '=namedRoute',
             args: '=routeParams'
