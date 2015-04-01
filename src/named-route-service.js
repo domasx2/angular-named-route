@@ -24,14 +24,19 @@ angular.module('ngNamedRoute').factory('namedRouteService', function ($route, $l
             throw new Error("Route name [" + name + "] not known.");
         }
 
-        return routemap[name].path.replace(/(:\w+)/g, function (match, p) {
+        return routemap[name].path.replace(/(:\w+[\*\?]{0,1})/g, function (match, p) {
             idx++;
 
             p = p.substring(1);
 
+            var placeholder = p[p.length - 1] === '?' ? '' : '?';
+            if (p[p.length - 1] === '*' || p[p.length - 1] === '?') {
+                p = p.substring(0, p.length - 1);
+            }
+
             //arguments is an array: resolve positional parameter
             if (angular.isArray(args)) {
-                return args[idx];
+                return idx < args.length ? args[idx] : placeholder;
             }
 
             //argument is an object: resolve property
@@ -39,12 +44,12 @@ angular.module('ngNamedRoute').factory('namedRouteService', function ($route, $l
                 if (args.hasOwnProperty(p)) {
                     return args[p];
                 }
-                return '?';
+                return placeholder;
             }
 
             //it's string or number, return as is, unless more than one is required
             if (!idx) {
-                return args === undefined ? '?' : args;
+                return args === undefined ? placeholder : args;
             }
 
             return '?';

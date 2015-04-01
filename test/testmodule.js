@@ -12,5 +12,13 @@ angular.module('testmodule', ['ngRoute', 'ngNamedRoute']).config(function($route
       .when('/phones/:phoneId/models/:modelId', {
         controller: 'PhoneModelDetailCtrl',
         name: 'phone-model-detail'
-      });
+      })
+      .when('/optional/:subpath?', {
+        controller: 'PhoneModelDetailCtrl',
+        name: 'optional-param-route'
+      })
+      .when('/admin/:page*/view', {
+        controller: 'AdminCtrl',
+        name: 'admin-greedy'
+      })
 });

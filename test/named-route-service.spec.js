@@ -27,4 +27,24 @@ describe('namedRouteService', function() {
   it('resolves phone detail route using object parameter', function() {
     expect(namedRouteService.reverse('phone-model-detail', {phoneId: 2, modelId: 'c'})).toEqual('/phones/2/models/c');
   });
+
+  it('optional parameter can be ignored', function () {
+    expect(namedRouteService.reverse('optional-param-route')).toEqual('/optional/');
+  });
+
+  it('optional parameter can be provided', function () {
+    expect(namedRouteService.reverse('optional-param-route', 'test')).toEqual('/optional/test');
+  });
+
+  it('greedy parameter also works', function () {
+    expect(namedRouteService.reverse('admin-greedy', 3)).toEqual('/admin/3/view');
+  });
+
+  it('optional parameter can be provided using object', function () {
+    expect(namedRouteService.reverse('optional-param-route', {subpath: 'test'})).toEqual('/optional/test');
+  });
+
+  it('greedy parameter also works using object', function () {
+    expect(namedRouteService.reverse('admin-greedy', {page: 'ten/ne'})).toEqual('/admin/ten/ne/view');
+  });
 });
