@@ -33,16 +33,20 @@ angular.module('myapp').controller('ThingCtrl', function (namedRouteService, $lo
     var path;
     
     //reverse to get path string
-    path = namedRouteService.reverse('home'); // '/'
+    path = namedRouteService.reverse('home'); 
+    //path = '/'
 
     //single param
-    path = namedRouteService.reverse('thing-detail', 1); // '/thing/1'
+    path = namedRouteService.reverse('thing-detail', 1); 
+    //path = '/thing/1'
 
     //param list
-    path = namedRouteService.reverse('thing-detail', [1]); // '/thing/1'
+    path = namedRouteService.reverse('thing-detail', [1]); 
+    //path = '/thing/1'
 
     //param object
-    path = namedRouteService.reverse('thing-detail', {id: 1}); // '/thing/1'
+    path = namedRouteService.reverse('thing-detail', {id: 1}); 
+    //path = '/thing/1'
 
     //open immediately
     namedRouteService.open('thing-detail', 1);
