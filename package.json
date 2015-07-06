@@ -1,6 +1,6 @@
 {
   "name": "angular-named-route",
-  "version": "1.3.16",
+  "version": "1.4.1",
   "description": "named route support for angular-route",
   "main": "index.js",
   "scripts": {
