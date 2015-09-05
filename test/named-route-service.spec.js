@@ -1,7 +1,7 @@
 describe('namedRouteService', function() {
   beforeEach(module('testmodule'));
 
-  var namedRouteService
+  var namedRouteService;
 
   beforeEach(inject(function(_namedRouteService_){
     // The injector unwraps the underscores (_) from around the parameter names when matching
@@ -47,4 +47,24 @@ describe('namedRouteService', function() {
   it('greedy parameter also works using object', function () {
     expect(namedRouteService.reverse('admin-greedy', {page: 'ten/ne'})).toEqual('/admin/ten/ne/view');
   });
+});
+
+describe('namedRouteService_hash', function () {
+  beforeEach(module('testmodule_hash'));
+
+  var namedRouteService;
+
+  beforeEach(inject(function(_namedRouteService_){
+    // The injector unwraps the underscores (_) from around the parameter names when matching
+    namedRouteService = _namedRouteService_;
+  }));
+
+  it('resolves home route', function() {
+    expect(namedRouteService.reverse('home')).toEqual('#!/');
+  });
+
+  it('resolves phone detail route using single parameter', function() {
+    expect(namedRouteService.reverse('phone-detail', 2)).toEqual('#!/phones/2');
+  });
+
 });

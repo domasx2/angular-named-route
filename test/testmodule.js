@@ -1,4 +1,5 @@
-angular.module('testmodule', ['ngRoute', 'ngNamedRoute']).config(function($routeProvider) {
+angular.module('testmodule', ['ngRoute', 'ngNamedRoute']).config(function($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
     $routeProvider.
       when('/', {
         controller: 'PhoneListCtrl',
@@ -21,4 +22,19 @@ angular.module('testmodule', ['ngRoute', 'ngNamedRoute']).config(function($route
         controller: 'AdminCtrl',
         name: 'admin-greedy'
       })
+});
+
+angular.module('testmodule_hash', ['ngRoute', 'ngNamedRoute']).config(function($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(false);
+    $locationProvider.hashPrefix('!');
+    $routeProvider.
+    when('/', {
+      controller: 'PhoneListCtrl',
+      name: 'home'
+    }).
+    when('/phones/:phoneId', {
+      templateUrl: 'partials/phone-detail.html',
+      controller: 'PhoneDetailCtrl',
+      name: 'phone-detail'
+    });
 });
