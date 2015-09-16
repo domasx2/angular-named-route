@@ -25,7 +25,7 @@ angular.module('ngNamedRoute').provider('namedRouteService', function ($location
                 throw new Error("Route name [" + name + "] not known.");
             }
 
-            return ($location.$$html5 ? '' : '#' + $locationProvider.hashPrefix()) + routemap[name].path.replace(/(:\w+[\*\?]{0,1})/g, function (match, p) {
+            return routemap[name].path.replace(/(:\w+[\*\?]{0,1})/g, function (match, p) {
                 idx++;
 
                 p = p.substring(1);
@@ -61,7 +61,8 @@ angular.module('ngNamedRoute').provider('namedRouteService', function ($location
             reverse: reverse,
             open: function (name, args) {
                 $location.path(reverse(name, args));
-            }
+            },
+            hashPrefix: function () { return $locationProvider.hashPrefix(); }
         };
     };
 });

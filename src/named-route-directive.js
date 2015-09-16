@@ -1,4 +1,4 @@
-angular.module('ngNamedRoute').directive('namedRoute', function (namedRouteService) {
+angular.module('ngNamedRoute').directive('namedRoute', ['$location', 'namedRouteService', function ($location, namedRouteService) {
     'use strict';
 
     return {
@@ -11,7 +11,7 @@ angular.module('ngNamedRoute').directive('namedRoute', function (namedRouteServi
 
             function updateHref() {
                 if ($scope.name !== undefined) {
-                    $element.attr('href', namedRouteService.reverse($scope.name, $scope.args));
+                    $element.attr('href', ($location.$$html5 ? '' : '#' + namedRouteService.hashPrefix()) + namedRouteService.reverse($scope.name, $scope.args));
                 }
             }
 
@@ -19,4 +19,4 @@ angular.module('ngNamedRoute').directive('namedRoute', function (namedRouteServi
             $scope.$watch('args', updateHref, true);
         }
     };
-});
+}]);
