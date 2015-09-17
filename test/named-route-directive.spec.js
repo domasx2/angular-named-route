@@ -57,3 +57,31 @@ describe("namedRouteDirective", function () {
 
 
 });
+
+describe('namedRouteDirective_hash', function () {
+  beforeEach(module('testmodule_hash'));
+
+  var namedRouteService, $compile, $rootScope;
+
+  beforeEach(inject(function(_$compile_, _$rootScope_){
+    $compile = _$compile_,
+    $rootScope = _$rootScope_;
+  }));
+
+
+  it('updates href with hashed home route', function() {
+    var element = $compile('<div><a named-route="\'home\'">link</a></div>')($rootScope);
+    $rootScope.$digest();
+    expect(element.html()).toContain('href="#!/"');
+  });
+
+
+  it('updates href with phone detail route, single arg', function() {
+    $rootScope.hrefname = 'the link';
+    var element = $compile('<div><a named-route="\'phone-detail\'" route-params="1">{{hrefname}}</a></div>')($rootScope);
+    $rootScope.$digest();
+    expect(element.html()).toContain('href="#!/phones/1"');
+    expect(element.html()).toContain('the link');
+  });
+
+});

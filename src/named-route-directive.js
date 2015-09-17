@@ -1,4 +1,4 @@
-angular.module('ngNamedRoute').directive('namedRoute', ['$location', 'namedRouteService', function ($location, namedRouteService) {
+angular.module('ngNamedRoute').directive('namedRoute', function ($location, namedRouteService) {
     'use strict';
 
     return {
@@ -19,4 +19,4 @@ angular.module('ngNamedRoute').directive('namedRoute', ['$location', 'namedRoute
             $scope.$watch('args', updateHref, true);
         }
     };
-}]);
+});

@@ -60,11 +60,11 @@ describe('namedRouteService_hash', function () {
   }));
 
   it('resolves home route', function() {
-    expect(namedRouteService.reverse('home')).toEqual('#!/');
+    expect(namedRouteService.reverse('home')).toEqual('/');
   });
 
   it('resolves phone detail route using single parameter', function() {
-    expect(namedRouteService.reverse('phone-detail', 2)).toEqual('#!/phones/2');
+    expect(namedRouteService.reverse('phone-detail', 2)).toEqual('/phones/2');
   });
 
 });
