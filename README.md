@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/domasx2/angular-named-route.svg)](https://travis-ci.org/domasx2/angular-named-route)
+
 Angular named route
 ===========================
 Named route support for angular-route. Name your routes so you don't have to copy-paste-replace url everywhere.
