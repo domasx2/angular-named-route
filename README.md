@@ -50,6 +50,10 @@ angular.module('myapp').controller('ThingCtrl', function (namedRouteService, $lo
     path = namedRouteService.reverse('thing-detail', {id: 1}); 
     //path = '/thing/1'
 
+    //query arguments
+    path = namedRouteService.reverse('thing-detail', 1, {foo: 'bar', 'baz': ['blah', 'meh']});
+    //path = '/thing/1?foo=bar&baz=blah&baz=meh'
+
     //open immediately
     namedRouteService.open('thing-detail', 1);
     //is same as
@@ -64,6 +68,8 @@ angular.module('myapp').controller('ThingCtrl', function (namedRouteService, $lo
 <a named-route="'thing-detail'" route-params="1">first thing</a>
 
 <a named-route="'thing-detail'" route-params="{id: 1}">first thing</a>
+
+<a named-route="'thing-detail'" route-params="1" route-query-params="{foo: 'bar'}">first thing</a>
 ```
 
 # Development

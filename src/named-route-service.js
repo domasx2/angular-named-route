@@ -18,14 +18,14 @@ angular.module('ngNamedRoute').provider('namedRouteService', function ($location
             }
         });
 
-        function reverse(name, args) {
-            var idx = -1;
+        function reverse(name, args, query_params) {
+            var idx = -1, url;
 
             if (!routemap.hasOwnProperty(name)) {
                 throw new Error("Route name [" + name + "] not known.");
             }
 
-            return routemap[name].path.replace(/(:\w+[\*\?]{0,1})/g, function (match, p) {
+            url = routemap[name].path.replace(/(:\w+[\*\?]{0,1})/g, function (match, p) {
                 idx++;
 
                 p = p.substring(1);
@@ -55,6 +55,19 @@ angular.module('ngNamedRoute').provider('namedRouteService', function ($location
 
                 return '?';
             });
+
+            if (query_params) {
+                url += '?' + Object.keys(query_params).map(function (key) {
+                    var val = query_params[key];
+                    if (angular.isArray(val)) {
+                        return val.map(function (val) {
+                            return key + '=' + encodeURIComponent(val);
+                        }).join('&');
+                    }
+                    return key + '=' + encodeURIComponent(val);
+                }).join('&');
+            }
+            return url;
         }
 
         return {

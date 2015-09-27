@@ -47,6 +47,14 @@ describe('namedRouteService', function() {
   it('greedy parameter also works using object', function () {
     expect(namedRouteService.reverse('admin-greedy', {page: 'ten/ne'})).toEqual('/admin/ten/ne/view');
   });
+
+  it('query parameter works', function () {
+    expect(namedRouteService.reverse('phone-detail', 2, {foo: 'bar', bar:'baz'})).toEqual('/phones/2?foo=bar&bar=baz');
+  });
+
+  it('array query parameter works', function () {
+    expect(namedRouteService.reverse('phone-detail', 2, {foo: ['bar', 'baz'], bar:'baz'})).toEqual('/phones/2?foo=bar&foo=baz&bar=baz');
+  });
 });
 
 describe('namedRouteService_hash', function () {
