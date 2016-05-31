@@ -113,7 +113,7 @@ describe('namedRouteService_base', function () {
   it('resolves phone route detail route using single parameter with base href', function() {
     inject(
       initBrowser({ url: 'http://host.com/prefix/', basePath: '/prefix' }),
-      function ($location, $browser) {
+      function () {
         expect(namedRouteService.reverse('phone-detail', 2)).toEqual('/prefix/phones/2');
       }
     );

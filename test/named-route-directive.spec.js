@@ -69,7 +69,7 @@ describe("namedRouteDirective", function () {
 describe('namedRouteDirective_hash', function () {
   beforeEach(module('testmodule_hash'));
 
-  var namedRouteService, $compile, $rootScope;
+  var $compile, $rootScope;
 
   beforeEach(inject(function(_$compile_, _$rootScope_){
     $compile = _$compile_,
