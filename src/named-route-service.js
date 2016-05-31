@@ -1,6 +1,22 @@
 angular.module('ngNamedRoute').provider('namedRouteService', function ($locationProvider) {
     'use strict';
 
+    /** Internal configuration variable. */
+    var shouldAlwaysPrefixBase = false;
+
+    /**
+     * Sets whether the service should always prefix the <base href />.
+     */
+    this.alwaysPrefixBase = function (value) {
+        if (value === undefined) {
+            return shouldAlwaysPrefixBase;
+        }
+
+        shouldAlwaysPrefixBase = value;
+
+        return this;
+    };
+
     this.$get = /*@ngInject*/ function ($route, $location, $browser) {
         //map name to route
         var routemap = {};
@@ -68,13 +84,16 @@ angular.module('ngNamedRoute').provider('namedRouteService', function ($location
                 }).join('&');
             }
 
-            if ($browser.baseHref() === '/') {
-                // No need to append '/'
-                return url;
-            } else {
+            if (shouldAlwaysPrefixBase) {
+                if ($browser.baseHref() === '/') {
+                    // No need to append '/'
+                    return url;
+                }
                 // Prepend the base href
                 return $browser.baseHref() + url;
             }
+
+            return url;
         }
 
         return {
