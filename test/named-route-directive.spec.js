@@ -93,3 +93,46 @@ describe('namedRouteDirective_hash', function () {
   });
 
 });
+
+describe('namedRouteService_base', function () {
+  beforeEach(module('testmodule'));
+
+  var $compile, $rootScope;
+
+  beforeEach(inject(function(_$compile_, _$rootScope_){
+    $compile = _$compile_,
+    $rootScope = _$rootScope_;
+  }));
+
+  it('updates href with hashed home route', function() {
+    inject(
+      initBrowser({ url: 'http://host.com/prefix/', basePath: '/prefix' }),
+      function () {
+        var element = $compile('<div><a named-route="\'home\'">link</a></div>')($rootScope);
+        $rootScope.$digest();
+        expect(element.find('a').attr('href')).toEqual('/prefix/');
+      }
+    );
+  });
+
+  it('updates href with phone detail route, single arg', function() {
+    inject(
+      initBrowser({ url: 'http://host.com/prefix/', basePath: '/prefix' }),
+      function () {
+        $rootScope.hrefname = 'the link';
+        var element = $compile('<div><a named-route="\'phone-detail\'" route-params="1">{{hrefname}}</a></div>')($rootScope);
+        $rootScope.$digest();
+        expect(element.find('a').attr('href')).toEqual('/prefix/phones/1');
+        expect(element.html()).toContain('the link');
+      }
+    );
+  });
+
+  /* From: https://github.com/angular/angular.js/blob/fa79eaa816aa27c6d1b3c084b8372f9c17c8d5a3/test/ng/locationSpec.js#L2630,L2635 */
+  function initBrowser(options) {
+    return function($browser) {
+      $browser.url(options.url);
+      $browser.$$baseHref = options.basePath;
+    };
+  }
+});
