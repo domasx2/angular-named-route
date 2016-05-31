@@ -78,7 +78,7 @@ describe('namedRouteService_hash', function () {
 });
 
 describe('namedRouteService_base', function () {
-  beforeEach(module('testmodule'));
+  beforeEach(module('testmodule_base'));
 
   var namedRouteService;
 
