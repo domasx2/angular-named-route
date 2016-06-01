@@ -71,10 +71,9 @@ angular.module('ngNamedRoute').provider('namedRouteService', function ($location
             if ($browser.baseHref() === '/') {
                 // No need to append '/'
                 return url;
-            } else {
-                // Prepend the base href
-                return $browser.baseHref() + url;
             }
+            // Prepend the base href
+            return $browser.baseHref() + url;
         }
 
         return {

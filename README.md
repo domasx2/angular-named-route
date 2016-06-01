@@ -2,10 +2,14 @@
 
 Angular named route
 ===========================
-Named route support for angular-route. Name your routes so you don't have to copy-paste-replace url everywhere.
+
+Named route support for angular-route. Name your routes so you don't have to copy-paste-replace URLs everywhere. Automatically prefixes [`<base />` href][rellink] so that all links created work in HTML 5 mode.
+
+[rellink]: https://docs.angularjs.org/guide/$location#relative-links
+
 # Install
 
-```sh 
+```sh
 bower install angular-named-route --save
 ```
 
@@ -33,21 +37,21 @@ angular.module('myapp').config(function($routeProvider) {
 //use as a service
 angular.module('myapp').controller('ThingCtrl', function (namedRouteService, $location) {
     var path;
-    
+
     //reverse to get path string
-    path = namedRouteService.reverse('home'); 
+    path = namedRouteService.reverse('home');
     //path = '/'
 
     //single param
-    path = namedRouteService.reverse('thing-detail', 1); 
+    path = namedRouteService.reverse('thing-detail', 1);
     //path = '/thing/1'
 
     //param list
-    path = namedRouteService.reverse('thing-detail', [1]); 
+    path = namedRouteService.reverse('thing-detail', [1]);
     //path = '/thing/1'
 
     //param object
-    path = namedRouteService.reverse('thing-detail', {id: 1}); 
+    path = namedRouteService.reverse('thing-detail', {id: 1});
     //path = '/thing/1'
 
     //query arguments
