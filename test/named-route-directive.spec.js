@@ -95,7 +95,7 @@ describe('namedRouteDirective_hash', function () {
 });
 
 describe('namedRouteService_base', function () {
-  beforeEach(module('testmodule_base'));
+  beforeEach(module('testmodule'));
 
   var $compile, $rootScope;
 

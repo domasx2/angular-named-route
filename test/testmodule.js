@@ -38,30 +38,3 @@ angular.module('testmodule_hash', ['ngRoute', 'ngNamedRoute']).config(function($
       name: 'phone-detail'
     });
 });
-
-angular.module('testmodule_base', ['ngRoute', 'ngNamedRoute']).config(function($routeProvider, $locationProvider, namedRouteServiceProvider) {
-    $locationProvider.html5Mode(true);
-    namedRouteServiceProvider.alwaysPrefixBase(true);
-    $routeProvider.
-      when('/', {
-        controller: 'PhoneListCtrl',
-        name: 'home'
-      }).
-      when('/phones/:phoneId', {
-        templateUrl: 'partials/phone-detail.html',
-        controller: 'PhoneDetailCtrl',
-        name: 'phone-detail'
-      })
-      .when('/phones/:phoneId/models/:modelId', {
-        controller: 'PhoneModelDetailCtrl',
-        name: 'phone-model-detail'
-      })
-      .when('/optional/:subpath?', {
-        controller: 'PhoneModelDetailCtrl',
-        name: 'optional-param-route'
-      })
-      .when('/admin/:page*/view', {
-        controller: 'AdminCtrl',
-        name: 'admin-greedy'
-      })
-});
