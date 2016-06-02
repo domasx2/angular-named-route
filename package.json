@@ -2,7 +2,7 @@
   "name": "angular-named-route",
   "version": "3.0.0",
   "description": "named route support for angular-route",
-  "main": "index.js",
+  "main": "dist/angular-named-route.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js --browsers Firefox --single-run",
     "postinstall": "./node_modules/bower/bin/bower install"

@@ -9,11 +9,34 @@ Named route support for angular-route. Name your routes so you don't have to cop
 
 # Install
 
+### Bower
+
 ```sh
 bower install angular-named-route --save
 ```
 
-or just grab dist/angular-named-route.js
+```html
+<script src="bower_components/angular-named-route/dist/angular-named-route.js" />
+```
+
+
+### NPM
+
+```sh
+npm install angular-named-route --save
+```
+
+
+```html
+<script src="node_modules/angular-named-route/dist/angular-named-route.js" />
+```
+
+or in case of webpack/browserify and npm
+
+```js
+import 'angular-named-route';
+```
+
 
 # Usage
 
