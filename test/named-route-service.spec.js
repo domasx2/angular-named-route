@@ -76,3 +76,37 @@ describe('namedRouteService_hash', function () {
   });
 
 });
+
+describe('namedRouteService_base', function () {
+  beforeEach(module('testmodule'));
+
+  var namedRouteService;
+
+  beforeEach(inject(function(_namedRouteService_){
+    // The injector unwraps the underscores (_) from around the parameter names when matching
+    namedRouteService = _namedRouteService_;
+  }));
+
+  it('resolves home route including base href', function() {
+    inject(
+      initBrowser({ url: 'http://host.com/prefix/', basePath: '/prefix' }),
+      function ($location, $browser) {
+        // Sanity check: location.path() should be at the root.
+        expect($location.path()).toEqual('/');
+        // Sanity check: location.baseHref() should be what we expect.
+        expect($browser.baseHref()).toEqual('/prefix');
+
+        expect(namedRouteService.reverse('home', undefined)).toEqual('/prefix/');
+      }
+    );
+  });
+
+  it('resolves phone route detail route using single parameter with base href', function() {
+    inject(
+      initBrowser({ url: 'http://host.com/prefix/', basePath: '/prefix' }),
+      function () {
+        expect(namedRouteService.reverse('phone-detail', 2)).toEqual('/prefix/phones/2');
+      }
+    );
+  });
+});

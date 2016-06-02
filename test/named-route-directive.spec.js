@@ -69,7 +69,7 @@ describe("namedRouteDirective", function () {
 describe('namedRouteDirective_hash', function () {
   beforeEach(module('testmodule_hash'));
 
-  var namedRouteService, $compile, $rootScope;
+  var $compile, $rootScope;
 
   beforeEach(inject(function(_$compile_, _$rootScope_){
     $compile = _$compile_,
@@ -90,6 +90,42 @@ describe('namedRouteDirective_hash', function () {
     $rootScope.$digest();
     expect(element.find('a').attr('href')).toEqual('#!/phones/1');
     expect(element.html()).toContain('the link');
+  });
+
+});
+
+describe('namedRouteService_base', function () {
+  beforeEach(module('testmodule'));
+
+  var $compile, $rootScope;
+
+  beforeEach(inject(function(_$compile_, _$rootScope_){
+    $compile = _$compile_,
+    $rootScope = _$rootScope_;
+  }));
+
+  it('updates href with hashed home route', function() {
+    inject(
+      initBrowser({ url: 'http://host.com/prefix/', basePath: '/prefix' }),
+      function () {
+        var element = $compile('<div><a named-route="\'home\'">link</a></div>')($rootScope);
+        $rootScope.$digest();
+        expect(element.find('a').attr('href')).toEqual('/prefix/');
+      }
+    );
+  });
+
+  it('updates href with phone detail route, single arg', function() {
+    inject(
+      initBrowser({ url: 'http://host.com/prefix/', basePath: '/prefix' }),
+      function () {
+        $rootScope.hrefname = 'the link';
+        var element = $compile('<div><a named-route="\'phone-detail\'" route-params="1">{{hrefname}}</a></div>')($rootScope);
+        $rootScope.$digest();
+        expect(element.find('a').attr('href')).toEqual('/prefix/phones/1');
+        expect(element.html()).toContain('the link');
+      }
+    );
   });
 
 });

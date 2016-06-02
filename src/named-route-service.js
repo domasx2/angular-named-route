@@ -1,7 +1,7 @@
 angular.module('ngNamedRoute').provider('namedRouteService', function ($locationProvider) {
     'use strict';
 
-    this.$get = /*@ngInject*/ function ($route, $location) {
+    this.$get = /*@ngInject*/ function ($route, $location, $browser) {
         //map name to route
         var routemap = {};
 
@@ -67,7 +67,13 @@ angular.module('ngNamedRoute').provider('namedRouteService', function ($location
                     return key + '=' + encodeURIComponent(val);
                 }).join('&');
             }
-            return url;
+
+            if ($browser.baseHref() === '/') {
+                // No need to append '/'
+                return url;
+            }
+            // Prepend the base href
+            return $browser.baseHref() + url;
         }
 
         return {
