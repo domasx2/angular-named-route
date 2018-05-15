@@ -9,16 +9,6 @@ Named route support for angular-route. Name your routes so you don't have to cop
 
 # Install
 
-### Bower
-
-```sh
-bower install angular-named-route --save
-```
-
-```html
-<script src="bower_components/angular-named-route/dist/angular-named-route.js" />
-```
-
 
 ### NPM
 
